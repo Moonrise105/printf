@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:57:56 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:57:17 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 19:31:49 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		s_writer(t_flags *flags, int max_s, void *arg)
 	{
 		while (i < flags->width - min_int(max_s, len))
 		{
-			ft_putchar(' ');
+			ft_putchar(flags->null ? '0' : ' ');
 			++i;
 		}
 		i += ft_putstr(arg, max_s);

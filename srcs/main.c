@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 23:45:41 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 18:08:32 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 20:19:39 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,23 +121,27 @@ int		ft_printf(const char *str, ...)
 			i = 1;
 			ft_parse_spec(str, &i, flags);
 			if (flags->spec == '0')
+			{
+				ft_free(flags);
 				return (0);
+			}
+				
 			len += decider(flags, argptr);
 			str += i;
 		}
 		else
 			if (write(1, str, 1) < 0)
+			{
+				ft_free(flags);
 				return (-1);
+			}
+				
 			else
 				len++;
 		str++;
 	}
 	va_end(argptr);
-	if (flags)
-		{
-			free(flags);
-			flags = NULL;
-		}
+	ft_free(flags);
 	return (len);
 }
 

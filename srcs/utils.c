@@ -6,11 +6,20 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 21:23:37 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:40:15 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 20:22:53 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
+
+void	ft_free(void *p)
+{
+	if (p)
+	{
+		free(p);
+		p = NULL;
+	}
+}
 
 void	init_flags (t_flags *flags)
 {
@@ -59,10 +68,11 @@ int		ft_abs(int nb)
 	return (nb);
 }
 
-int		count_digits_16(unsigned long long nb)
+int		count_digits_16(unsigned long long nb, t_flags *flags)
 {
 	int size;
-
+	if (!nb && flags->point && !flags->accuracy)
+		return (2);
 	if (!nb)
 		return (3);
 	size = 1;
@@ -121,20 +131,25 @@ char	*ft_itoa_base(unsigned long long value, int base, int caps)
 	return (str);
 }
 
-int		ft_put_adress(size_t pointer)
+int		ft_put_adress(size_t pointer, t_flags *flags)
 {
 	char *str;
 	int i;
 	
 	i = 0;
-	// if (!pointer)
-	// 	return (write(1, "(nil)", 5));
+	if (!pointer && flags->point && !flags->accuracy)
+		return (write(1, "0x", 2));
 	if((str = ft_itoa_base(pointer, 16, 0)))
 	{
 		if (!(write(1, "0x", 2)))
+		{
+			ft_free(str);
 			return (0);
+		}
+			
 		i = ft_putstr(str, ft_strlen(str));
 	}
+	ft_free(str);
 	return (i + 2);
 }
 

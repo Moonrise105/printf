@@ -21,11 +21,7 @@ int main(void)
 	// len2 = ft_printf("hello %-*.*d lalalad %-5c\n", 5, 10, 21, '@');
 	// printf("%d\n", len1);
 	// printf("%d\n", len2);
-	size_t arg;
-	int *p;
-	int c = 5;
-	p = &c;
-	arg = (size_t)p;
+
 
 	int count;
 
@@ -49,10 +45,10 @@ int main(void)
 	char *s_hidden = "hi low\0don't print me lol\0";
 
 	//count = printf("|%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
-	// count = printf("this %d number", 17);
+	// count = printf("%5s", "Fafae");
 	// printf("\n%d\n", count);
-	count = ft_printf("hello %d ", 1751);
-	printf("\n%d\n", count);
+	count = ft_printf("%5s", "fea");
+	//printf("\n%d\n", count);
 
 	//count = ft_printf("|%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
 	// count = ft_printf("%d", 4);

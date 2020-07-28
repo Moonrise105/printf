@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 00:12:30 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:57:40 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 20:23:28 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps)
 	res += ft_putstr(str, len);
 	res += put_n_symbols(sym, flags->width - \
 	max_int(flags->accuracy, len));
-
+	ft_free(str);
 	return (res);
 }
 
