@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   x_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 00:12:30 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 20:23:28 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:51:15 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps)
+static int	x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps)
 {
-	int res;
-	int len;
-	char *str;
+	int		res;
+	int		len;
+	char	*str;
 
 	res = 0;
 	len = (arg == 0 ? 1 : x_count_digits(arg));
@@ -29,12 +29,12 @@ int			x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps)
 	return (res);
 }
 
-int			x_writer(t_flags *flags, char sym, unsigned int arg, int caps)
+static int	x_writer(t_flags *flags, char sym, unsigned int arg, int caps)
 {
-	int res;
-	char *str;
-	int len;
-	
+	int		res;
+	char	*str;
+	int		len;
+
 	res = 0;
 	len = (arg == 0 ? 1 : x_count_digits(arg));
 	if (sym == '0')
@@ -50,10 +50,11 @@ int			x_writer(t_flags *flags, char sym, unsigned int arg, int caps)
 	res += put_n_symbols('0', flags->accuracy - len);
 	str = ft_itoa_base(arg, 16, caps);
 	res += ft_putstr(str, len);
+	ft_free(str);
 	return (res);
 }
 
-void		x_ignore_flags(t_flags *flags)
+static void	x_ignore_flags(t_flags *flags)
 {
 	if (flags->null && flags->minus)
 		flags->null = 0;
@@ -61,7 +62,7 @@ void		x_ignore_flags(t_flags *flags)
 		flags->null = 0;
 }
 
-static void x_check_stars(t_flags *flags, va_list argptr)
+static void	x_check_stars(t_flags *flags, va_list argptr)
 {
 	if (flags->width_sub)
 	{
@@ -70,7 +71,7 @@ static void x_check_stars(t_flags *flags, va_list argptr)
 		{
 			flags->minus = 1;
 			flags->width *= -1;
-		} 
+		}
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);

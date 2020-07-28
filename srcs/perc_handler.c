@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   perc_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 14:23:15 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 19:48:40 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:40:30 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void perc_check_stars(t_flags *flags, va_list argptr)
+static void		perc_check_stars(t_flags *flags, va_list argptr)
 {
 	if (flags->width_sub)
 	{
@@ -21,17 +21,19 @@ static void perc_check_stars(t_flags *flags, va_list argptr)
 		{
 			flags->minus = 1;
 			flags->width *= -1;
-		} 
+		}
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
 }
-int		perc_handler(t_flags *flags, va_list argptr)
+
+int				perc_handler(t_flags *flags, va_list argptr)
 {
 	char	arg;
 	int		i;
-	char sym;
-	
+	char	sym;
+
+	perc_check_stars(flags, argptr);
 	sym = flags->null ? '0' : ' ';
 	arg = '%';
 	i = 0;

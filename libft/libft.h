@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 22:55:39 by moonrise          #+#    #+#             */
-/*   Updated: 2020/07/28 00:38:49 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:54:54 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,4 @@ void				ft_lstclear(t_list **lst, void (*del)(void*));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
-
-
-char	*ft_strnew(size_t size);
 #endif

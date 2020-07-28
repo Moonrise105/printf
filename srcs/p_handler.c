@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 14:10:29 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 20:21:16 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:30:09 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		p_handler(t_flags *flags, va_list argptr)
 {
-	size_t arg;
-	int i;
-	int len;
+	size_t		arg;
+	int			i;
+	int			len;
 
 	if (flags->width_sub)
 		flags->width = va_arg(argptr, int);

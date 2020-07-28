@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   c_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 23:31:06 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:57:22 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:25:10 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void c_check_stars(t_flags *flags, va_list argptr)
+static void		c_check_stars(t_flags *flags, va_list argptr)
 {
 	if (flags->width_sub)
 	{
@@ -21,13 +21,13 @@ static void c_check_stars(t_flags *flags, va_list argptr)
 		{
 			flags->minus = 1;
 			flags->width *= -1;
-		} 
+		}
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
 }
 
-int		c_handler(t_flags *flags, va_list argptr)
+int				c_handler(t_flags *flags, va_list argptr)
 {
 	char	arg;
 	int		i;

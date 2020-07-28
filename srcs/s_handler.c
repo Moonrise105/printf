@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   s_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:57:56 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 19:31:49 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:41:20 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int		s_writer(t_flags *flags, int max_s, void *arg)
+static int		s_writer(t_flags *flags, int max_s, void *arg)
 {
 	int i;
 	int len;
@@ -49,7 +49,7 @@ static	void	s_check_stars(t_flags *flags, va_list argptr)
 		{
 			flags->minus = 1;
 			flags->width *= -1;
-		} 
+		}
 	}
 	if (flags->accuracy_sub)
 	{
@@ -59,14 +59,13 @@ static	void	s_check_stars(t_flags *flags, va_list argptr)
 			flags->accuracy = 0;
 			flags->point = 0;
 		}
-	}	
+	}
 }
-int		s_handler(t_flags *flags, va_list argptr)
+
+int				s_handler(t_flags *flags, va_list argptr)
 {
 	void	*arg;
-	int		i;
 	int		max_s;
-	int		len;
 
 	s_check_stars(flags, argptr);
 	arg = va_arg(argptr, void*);

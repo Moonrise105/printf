@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   d_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 21:37:53 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:58:59 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 02:26:07 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int			d_writer_minus(t_flags *flags, char sym, int arg)
+static int			d_writer_minus(t_flags *flags, char sym, int arg)
 {
 	int neg;
 	int res;
@@ -31,14 +31,12 @@ int			d_writer_minus(t_flags *flags, char sym, int arg)
 	return (res);
 }
 
-int			d_writer(t_flags *flags, char sym, int arg)
+static int			d_writer(t_flags *flags, char sym, int arg, int res)
 {
-	int neg;
-	int res;
-	int len;
-	unsigned int nb;
+	int				neg;
+	int				len;
+	unsigned int	nb;
 
-	res = 0;
 	res += (len = (arg == 0 ? 1 : count_digits(arg)));
 	neg = (arg < 0 ? 1 : 0);
 	if (sym == '0')
@@ -61,7 +59,7 @@ int			d_writer(t_flags *flags, char sym, int arg)
 	return (res);
 }
 
-void		d_ignore_flags(t_flags *flags)
+static void			d_ignore_flags(t_flags *flags)
 {
 	if (flags->null && flags->minus)
 		flags->null = 0;
@@ -69,7 +67,7 @@ void		d_ignore_flags(t_flags *flags)
 		flags->null = 0;
 }
 
-static void		d_check_stars(t_flags *flags, va_list argptr)
+static void			d_check_stars(t_flags *flags, va_list argptr)
 {
 	if (flags->width_sub)
 	{
@@ -78,17 +76,16 @@ static void		d_check_stars(t_flags *flags, va_list argptr)
 		{
 			flags->minus = 1;
 			flags->width *= -1;
-		} 
+		}
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
 }
 
-int			d_handler(t_flags *flags, va_list argptr)
+int					d_handler(t_flags *flags, va_list argptr)
 {
 	int		arg;
 	char	sym;
-	int		neg;
 
 	d_check_stars(flags, argptr);
 	arg = va_arg(argptr, int);
@@ -99,7 +96,7 @@ int			d_handler(t_flags *flags, va_list argptr)
 		return (put_n_symbols(sym, flags->width));
 	}
 	if (!flags->minus)
-		return (d_writer(flags, sym, arg));
+		return (d_writer(flags, sym, arg, 0));
 	else
 		return (d_writer_minus(flags, sym, arg));
 }
