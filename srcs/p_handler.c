@@ -1,50 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_handler.c                                        :+:      :+:    :+:   */
+/*   p_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/27 23:31:06 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:57:22 by ctobias          ###   ########.fr       */
+/*   Created: 2020/07/28 14:10:29 by ctobias           #+#    #+#             */
+/*   Updated: 2020/07/28 16:37:52 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void c_check_stars(t_flags *flags, va_list argptr)
+int		p_handler(t_flags *flags, va_list argptr)
 {
+	size_t arg;
+	int i;
+	int len;
+
 	if (flags->width_sub)
-	{
 		flags->width = va_arg(argptr, int);
-		if (flags->width < 0)
-		{
-			flags->minus = 1;
-			flags->width *= -1;
-		} 
-	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
-}
-
-int		c_handler(t_flags *flags, va_list argptr)
-{
-	char	arg;
-	int		i;
-
-	c_check_stars(flags, argptr);
-	arg = va_arg(argptr, int);
+	arg = va_arg(argptr, size_t);
 	i = 0;
+	len = count_digits_16(arg);
 	if (flags->minus)
 	{
-		i += ft_putchar(arg);
+		i += ft_put_adress(arg);
 		i += put_n_symbols(' ', flags->width - i);
 	}
 	else
 	{
-		++i;
-		i += put_n_symbols(' ', flags->width - i);
-		ft_putchar(arg);
+		i += put_n_symbols(' ', flags->width - len - i);
+		i += ft_put_adress(arg);
 	}
 	return (i);
 }

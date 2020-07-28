@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 19:47:35 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 03:13:30 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:41:07 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdbool.h>
 # include <stdint.h>
 # include <limits.h>
 //int		func(int number, ...);
@@ -28,11 +27,11 @@ typedef struct s_flags {
 	int width;
 	int accuracy;
 	char spec;
-	bool null;
-	bool point;
-	bool minus;
-	bool accuracy_sub;
-	bool width_sub;
+	int null;
+	int point;
+	int minus;
+	int accuracy_sub;
+	int width_sub;
 	
 } t_flags;
 
@@ -70,7 +69,9 @@ int		x_count_digits(unsigned int nb);
 void		x_ignore_flags(t_flags *flags);
 int			x_writer(t_flags *flags, char sym, unsigned int arg, int caps);
 int			x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps);
-
+int		p_handler(t_flags *flags, va_list argptr);
+int		perc_handler(t_flags *flags, va_list argptr);
 char	*ft_itoa_base(unsigned long long value, int base, int caps);
+void	init_flags (t_flags *flags);
 
 #endif

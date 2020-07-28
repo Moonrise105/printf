@@ -49,12 +49,14 @@ int main(void)
 	char *s_hidden = "hi low\0don't print me lol\0";
 
 	//count = printf("|%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
-	count = printf("%% *.5i 42 == |% *.5i|\n", 4, 42);
+	// count = printf("this %d number", 17);
+	// printf("\n%d\n", count);
+	count = ft_printf("hello %d ", 1751);
 	printf("\n%d\n", count);
 
 	//count = ft_printf("|%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p%70p|\n",&a01,&a02,&a03,&a04,&a05,&a06,&a07,&a08,&a09,&a10,&a11,&a12);
-	count = ft_printf("%% *.5i 42 == |% *.5i|\n", 4, 42);
-	printf("\n%d\n", count);
+	// count = ft_printf("%d", 4);
+	// printf("\n%d\n", count);
 
 	//printf("%ld", (size_t)p);
 	//printf("%p", p);

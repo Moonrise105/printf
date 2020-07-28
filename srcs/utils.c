@@ -3,15 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 21:23:37 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 03:13:13 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:40:15 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
+void	init_flags (t_flags *flags)
+{
+	flags->width_sub = 0;
+	flags->accuracy = 0;
+	flags->minus = 0;
+	flags->null = 0;
+	flags->point = 0;
+	flags->accuracy_sub = 0;
+	flags->width = 0;
+	flags->spec = '0';
+}
 int		min_int (int a, int b)
 {
 	if (a <= b)
@@ -53,7 +64,7 @@ int		count_digits_16(unsigned long long nb)
 	int size;
 
 	if (!nb)
-		return (5);
+		return (3);
 	size = 1;
 	while (nb /= 16)
 		size++;
@@ -116,8 +127,8 @@ int		ft_put_adress(size_t pointer)
 	int i;
 	
 	i = 0;
-	if (!pointer)
-		return (write(1, "(nil)", 5));
+	// if (!pointer)
+	// 	return (write(1, "(nil)", 5));
 	if((str = ft_itoa_base(pointer, 16, 0)))
 	{
 		if (!(write(1, "0x", 2)))
@@ -156,6 +167,7 @@ int 	count_digits(int n)
 	{
 		return 1 + count_digits(n / 10);
 	}
+	return (0);
 }
 
 int 	u_count_digits(unsigned int n) 
@@ -165,9 +177,8 @@ int 	u_count_digits(unsigned int n)
         return 0;
 		
 	else if (n > 0)
-	{
 		return 1 + count_digits(n / 10);
-	}
+	return (0);
 } 
 
 void		u_putnbr_stdout(unsigned int n)

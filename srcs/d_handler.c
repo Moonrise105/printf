@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   d_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 21:37:53 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 03:11:59 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:58:59 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			d_writer_minus(t_flags *flags, char sym, int arg)
 	int res;
 	int len;
 
+	res = 0;
 	res += (len = (arg == 0 ? 1 : count_digits(arg)));
 	neg = (arg < 0 ? 1 : 0);
 	if (arg < 0)
@@ -37,6 +38,7 @@ int			d_writer(t_flags *flags, char sym, int arg)
 	int len;
 	unsigned int nb;
 
+	res = 0;
 	res += (len = (arg == 0 ? 1 : count_digits(arg)));
 	neg = (arg < 0 ? 1 : 0);
 	if (sym == '0')
@@ -55,7 +57,6 @@ int			d_writer(t_flags *flags, char sym, int arg)
 	}
 	res += put_n_symbols('0', flags->accuracy - len);
 	nb = (arg >= 0 ? arg : arg * -1);
-	//printf("{%lld}\n", arg);
 	putnbr_stdout(nb);
 	return (res);
 }
@@ -68,12 +69,8 @@ void		d_ignore_flags(t_flags *flags)
 		flags->null = 0;
 }
 
-int			d_handler(t_flags *flags, va_list argptr)
+static void		d_check_stars(t_flags *flags, va_list argptr)
 {
-	int		arg;
-	char	sym;
-	int		neg;
-
 	if (flags->width_sub)
 	{
 		flags->width = va_arg(argptr, int);
@@ -85,6 +82,15 @@ int			d_handler(t_flags *flags, va_list argptr)
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
+}
+
+int			d_handler(t_flags *flags, va_list argptr)
+{
+	int		arg;
+	char	sym;
+	int		neg;
+
+	d_check_stars(flags, argptr);
 	arg = va_arg(argptr, int);
 	d_ignore_flags(flags);
 	sym = flags->null ? '0' : ' ';

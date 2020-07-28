@@ -3,49 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   s_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 22:57:56 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 02:58:52 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:57:17 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-int		s_null_writer(t_flags *flags, int max_s)
-{
-	int i;
-
-	i = 0;
-	if (!flags->minus && max_s >= 6)
-	{
-		i += (put_n_symbols(' ', flags->width - 6 - i));
-		i += (ft_putstr(NULL, max_s));
-	}
-	else if (max_s >= 6)
-	{
-		i += ft_putstr(NULL, max_s);
-		i += put_n_symbols(' ', flags->width - i);
-	}
-	else
-		i += put_n_symbols(' ', flags->width - i);
-	return (i);
-}
-
-int		s_null_handler(t_flags *flags)
-{
-	int i;
-	int max_s;
-
-	i = 0;
-	if (flags->accuracy)
-		max_s = flags->accuracy;
-	else if (flags->point)
-		max_s = 0;
-	else
-		max_s = 6;
-	return (s_null_writer(flags, max_s));
-}
 
 int		s_writer(t_flags *flags, int max_s, void *arg)
 {
@@ -75,13 +40,8 @@ int		s_writer(t_flags *flags, int max_s, void *arg)
 	return (i);
 }
 
-int		s_handler(t_flags *flags, va_list argptr)
+static	void	s_check_stars(t_flags *flags, va_list argptr)
 {
-	void	*arg;
-	int		i;
-	int		max_s;
-	int		len;
-
 	if (flags->width_sub)
 	{
 		flags->width = va_arg(argptr, int);
@@ -100,9 +60,18 @@ int		s_handler(t_flags *flags, va_list argptr)
 			flags->point = 0;
 		}
 	}	
+}
+int		s_handler(t_flags *flags, va_list argptr)
+{
+	void	*arg;
+	int		i;
+	int		max_s;
+	int		len;
+
+	s_check_stars(flags, argptr);
 	arg = va_arg(argptr, void*);
 	if (!arg)
-		return (s_null_handler(flags));
+		arg = "(null)";
 	if (flags->accuracy)
 		max_s = flags->accuracy;
 	else if (flags->point)

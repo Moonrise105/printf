@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   x_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/28 00:12:30 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 02:54:40 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/28 17:57:40 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int			x_writer_minus(t_flags *flags, char sym, unsigned int arg, int caps)
 	int len;
 	char *str;
 
+	res = 0;
 	len = (arg == 0 ? 1 : x_count_digits(arg));
 	res += put_n_symbols('0', flags->accuracy - len);
 	str = ft_itoa_base(arg, 16, caps);
@@ -34,8 +35,8 @@ int			x_writer(t_flags *flags, char sym, unsigned int arg, int caps)
 	char *str;
 	int len;
 	
+	res = 0;
 	len = (arg == 0 ? 1 : x_count_digits(arg));
-	// printf("|count %d|", len);
 	if (sym == '0')
 	{
 		res += put_n_symbols(sym, flags->width - \
@@ -60,12 +61,8 @@ void		x_ignore_flags(t_flags *flags)
 		flags->null = 0;
 }
 
-int			x_handler(t_flags *flags, va_list argptr)
+static void x_check_stars(t_flags *flags, va_list argptr)
 {
-	int		arg;
-	char	sym;
-	int		caps;
-
 	if (flags->width_sub)
 	{
 		flags->width = va_arg(argptr, int);
@@ -77,6 +74,15 @@ int			x_handler(t_flags *flags, va_list argptr)
 	}
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
+}
+
+int			x_handler(t_flags *flags, va_list argptr)
+{
+	int		arg;
+	char	sym;
+	int		caps;
+
+	x_check_stars(flags, argptr);
 	arg = va_arg(argptr, unsigned int);
 	x_ignore_flags(flags);
 	caps = flags->spec == 'x' ? 0 : 1;

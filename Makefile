@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+         #
+#    By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/07/20 19:47:39 by ctobias           #+#    #+#              #
-#    Updated: 2020/07/28 01:11:29 by ctobias          ###   ########.fr        #
+#    Updated: 2020/07/28 14:24:39 by ctobias          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ HEADER = includes
 
 SOURCES = main.c utils.c d_handler.c \
 		s_handler.c c_handler.c u_handler.c \
-		x_handler.c
+		x_handler.c p_handler.c perc_handler.c \
 
 SRCS = $(addprefix $(DIR_S)/,$(SOURCES))
 

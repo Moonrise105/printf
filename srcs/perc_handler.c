@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   c_handler.c                                        :+:      :+:    :+:   */
+/*   perc_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/27 23:31:06 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/28 17:57:22 by ctobias          ###   ########.fr       */
+/*   Created: 2020/07/28 14:23:15 by ctobias           #+#    #+#             */
+/*   Updated: 2020/07/28 17:42:28 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static void c_check_stars(t_flags *flags, va_list argptr)
+static void perc_check_stars(t_flags *flags, va_list argptr)
 {
 	if (flags->width_sub)
 	{
@@ -26,14 +26,14 @@ static void c_check_stars(t_flags *flags, va_list argptr)
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
 }
-
-int		c_handler(t_flags *flags, va_list argptr)
+int		perc_handler(t_flags *flags, va_list argptr)
 {
 	char	arg;
 	int		i;
-
-	c_check_stars(flags, argptr);
-	arg = va_arg(argptr, int);
+	char sym;
+	
+	sym = flags->null ? '0' : ' ';
+	arg = '%';
 	i = 0;
 	if (flags->minus)
 	{
@@ -43,7 +43,7 @@ int		c_handler(t_flags *flags, va_list argptr)
 	else
 	{
 		++i;
-		i += put_n_symbols(' ', flags->width - i);
+		i += put_n_symbols(sym, flags->width - i);
 		ft_putchar(arg);
 	}
 	return (i);
