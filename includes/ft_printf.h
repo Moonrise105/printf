@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 19:47:35 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 16:20:09 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 16:41:29 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# include <stdio.h>
 
 typedef struct	s_flags {
 	int			width;
