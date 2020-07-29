@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 21:37:53 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 14:10:46 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 14:36:01 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,6 @@ int					d_handler(t_flags *flags, va_list argptr)
 	arg = va_arg(argptr, int);
 	d_ignore_flags(flags);
 	sym = flags->null ? '0' : ' ';
-	// if (flags->point && flags->accuracy == 0)
-	// {
-	// 	return (put_n_symbols(sym, flags->width));
-	// }
 	if (!flags->minus)
 		return (d_writer(flags, sym, arg, 0));
 	else

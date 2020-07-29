@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 23:42:29 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 14:34:36 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 14:35:31 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void		u_check_stars(t_flags *flags, va_list argptr)
 	if (flags->accuracy_sub)
 		flags->accuracy = va_arg(argptr, int);
 }
-//#include <stdio.h>
+
 int				u_handler(t_flags *flags, va_list argptr)
 {
 	unsigned int	arg;
@@ -78,13 +78,8 @@ int				u_handler(t_flags *flags, va_list argptr)
 
 	u_check_stars(flags, argptr);
 	arg = va_arg(argptr, unsigned int);
-	//printf("{%u}\n", arg);
 	u_ignore_flags(flags);
 	sym = flags->null ? '0' : ' ';
-	// if (flags->point && flags->accuracy == 0)
-	// {
-	// 	return (put_n_symbols(sym, flags->width));
-	// }
 	if (!flags->minus)
 		return (u_writer(flags, sym, arg));
 	else
