@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/17 22:55:39 by moonrise          #+#    #+#             */
-/*   Updated: 2020/07/29 13:41:32 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 14:05:39 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int					ft_isascii(int ch);
 int					ft_isprint(int ch);
 int					ft_toupper(int ch);
 int					ft_tolower(int ch);
-void				ft_putchar(char c);
 void				*ft_memcpy(void *dest, const void *src, size_t count);
 void				*ft_memccpy(void *dest, const void *source, int ch,
 					size_t count);
