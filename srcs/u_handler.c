@@ -6,7 +6,7 @@
 /*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 23:42:29 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 14:35:31 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 16:19:02 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,14 @@ static int		u_writer_minus(t_flags *flags, char sym, unsigned int arg)
 {
 	int res;
 	int len;
+	int flag_nn;
 
 	res = 0;
-	res += (len = (arg == 0 ? 1 : u_count_digits(arg)));
+	flag_nn = (!flags->accuracy && flags->point && !arg) ? 1 : 0;
+	res += (len = (arg == 0 && !flag_nn ? 1 : u_count_digits(arg)));
 	res += put_n_symbols('0', flags->accuracy - len);
-	putnbr_stdout(arg);
+	if (!flag_nn)
+		putnbr_stdout(arg);
 	res += put_n_symbols(sym, flags->width - \
 	max_int(flags->accuracy, len));
 	return (res);
@@ -30,9 +33,11 @@ static int		u_writer(t_flags *flags, char sym, unsigned int arg)
 {
 	int res;
 	int len;
+	int flag_nn;
 
 	res = 0;
-	res += (len = (arg == 0 ? 1 : u_count_digits(arg)));
+	flag_nn = (!flags->accuracy && flags->point && !arg) ? 1 : 0;
+	res += (len = (arg == 0 && !flag_nn ? 1 : u_count_digits(arg)));
 	if (sym == '0')
 	{
 		res += put_n_symbols(sym, flags->width - \
@@ -44,7 +49,8 @@ static int		u_writer(t_flags *flags, char sym, unsigned int arg)
 		max_int(flags->accuracy, len));
 	}
 	res += put_n_symbols('0', flags->accuracy - len);
-	putnbr_stdout(arg);
+	if (!flag_nn)
+		putnbr_stdout(arg);
 	return (res);
 }
 
@@ -68,7 +74,14 @@ static void		u_check_stars(t_flags *flags, va_list argptr)
 		}
 	}
 	if (flags->accuracy_sub)
+	{
 		flags->accuracy = va_arg(argptr, int);
+		if (flags->accuracy < 0)
+		{
+			flags->accuracy = 0;
+			flags->point = 0;
+		}
+	}
 }
 
 int				u_handler(t_flags *flags, va_list argptr)

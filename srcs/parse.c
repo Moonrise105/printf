@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 01:27:55 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 02:31:43 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:30:21 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		parse_width(const char *str, int *i, t_flags *flags)
 
 static void		parse_accur(const char *str, int *i, t_flags *flags)
 {
+	flags->accuracy_parsed = 1;
 	while (str[*i] != '\0' && ft_isdigit(str[*i]))
 	{
 		flags->accuracy = flags->accuracy * 10 + (str[*i] - 48);
@@ -46,7 +47,7 @@ static int		parse_flags(char *specifier_list, int *i,
 		&& !(str[*i - 1] == '.'))
 		flags->null = 1;
 	else if (str[*i] == '.' && (flags->width || flags->width_sub \
-		|| str[*i - 1] == '.' || str[*i - 1] == '%' || str[*i - 1] == '-'))
+		|| ft_strchr("%.-0", str[*i - 1])))
 		flags->point = 1;
 	else if (ft_isdigit(str[*i]) && !flags->width && \
 			ft_strchr("%-0", str[*i - 1]))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 21:23:37 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 02:43:08 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:29:43 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_flags(t_flags *flags)
 	flags->accuracy_sub = 0;
 	flags->width = 0;
 	flags->spec = '0';
+	flags->accuracy_parsed = 0;
 }
 
 int		min_int(int a, int b)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   c_handler.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 23:31:06 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 02:25:10 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 15:16:34 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@ static void		c_check_stars(t_flags *flags, va_list argptr)
 		}
 	}
 	if (flags->accuracy_sub)
+	{
 		flags->accuracy = va_arg(argptr, int);
+		if (flags->accuracy < 0)
+		{
+			flags->accuracy = 0;
+			flags->point = 0;
+		}
+	}
 }
 
 int				c_handler(t_flags *flags, va_list argptr)

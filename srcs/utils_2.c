@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ctobias <ctobias@student.21.ru>            +#+  +:+       +#+        */
+/*   By: ctobias <ctobias@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/29 00:35:32 by ctobias           #+#    #+#             */
-/*   Updated: 2020/07/29 02:46:00 by ctobias          ###   ########.fr       */
+/*   Updated: 2020/07/29 16:13:19 by ctobias          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ int		count_digits_16(unsigned long long nb, t_flags *flags)
 	return (size + 2);
 }
 
-int		x_count_digits(unsigned int nb)
+int		x_count_digits(unsigned int nb, int n)
 {
 	int size;
 
+	if (n)
+		return (0);
 	size = 1;
 	while (nb /= 16)
 	{
